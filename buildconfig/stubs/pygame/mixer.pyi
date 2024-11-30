@@ -5,7 +5,7 @@ import numpy
 from pygame.event import Event
 
 from . import mixer_music
-from ._common import FileArg
+from pygame.typing import FileLike
 
 # export mixer_music as mixer.music
 music = mixer_music
@@ -44,7 +44,7 @@ def get_sdl_mixer_version(linked: bool = True) -> Tuple[int, int, int]: ...
 
 class Sound:
     @overload
-    def __init__(self, file: FileArg) -> None: ...
+    def __init__(self, file: FileLike) -> None: ...
     @overload
     def __init__(
         self, buffer: Any
@@ -70,6 +70,8 @@ class Sound:
     def get_num_channels(self) -> int: ...
     def get_length(self) -> float: ...
     def get_raw(self) -> bytes: ...
+    def copy(self) -> Sound: ...
+    def __copy__(self) -> Sound: ...
 
 
 class Channel:
